@@ -2,6 +2,9 @@ from tqdm import tqdm
 import wsol
 import wsol.method
 import os
+import torch
+import torch.nn as nn
+
 
 class Trainer(object):
     _CHECKPOINT_NAME_TEMPLATE = '{}_checkpoint.pth.tar'
