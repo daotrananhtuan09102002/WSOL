@@ -175,7 +175,7 @@ def get_data_loader(data_roots, metadata_root, batch_size,
     loaders = {
         'train': DataLoader(
             loader_dict['train'](
-                data_root=data_roots['train'],
+                data_root=data_roots,
                 metadata_root=os.path.join(metadata_root, 'train'),
                 transform=dataset_transforms['train'],
                 proxy=False,
