@@ -208,13 +208,12 @@ class Trainer(object):
 
     def _torch_save_model(self, filename):
         torch.save({'state_dict': self.model.state_dict()},
-                   filename)
+                   os.path.join(self.log_dir, filename))
 
 
-    def save_checkpoint(self, epoch, checkpoint_path):
-        print("Saving checkpoint to {}".format(checkpoint_path))
+    def save_checkpoint(self, epoch):
         self._torch_save_model(
-            f'{checkpoint_path}{epoch}_checkpoint.pth.tar')
+            f'{epoch}_checkpoint.pth.tar')
         
     def load_checkpoint(self, checkpoint_name):
         checkpoint_path = os.path.join(
