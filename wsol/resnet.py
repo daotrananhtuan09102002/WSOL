@@ -185,7 +185,7 @@ class ResNetDrop(ResNetCam):
             return {'logits': logits, 'cams': cams,
                     'feature': unerased_x, 'feature_erased': erased_x, 'sim': sim}
         return {'logits': logits, 'feature': unerased_x, 'feature_erased': erased_x, 'sim': sim}
-
+    
 def get_downsampling_layer(inplanes, block, planes, stride):
     outplanes = planes * block.expansion
     if stride == 1 and inplanes == outplanes:

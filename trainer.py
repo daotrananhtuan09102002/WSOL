@@ -226,7 +226,7 @@ class Trainer(object):
             print("Check {} loaded.".format(checkpoint_path))
 
 
-    def train(self, split, warm=False):
+    def train(self, warm=False):
         self.model_multi.train()
         loader = self.loader
 
