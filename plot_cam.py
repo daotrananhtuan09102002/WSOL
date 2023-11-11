@@ -1,7 +1,6 @@
 from PIL import Image
 import torch
 from torchvision import transforms
-import wsod
 import numpy as np
 import cv2
 
