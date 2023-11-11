@@ -234,7 +234,7 @@ class Trainer(object):
         num_correct = 0
         num_images = 0
 
-        for batch_idx, (images, target) in enumerate(loader):
+        for batch_idx, (images, target) in enumerate(tqdm(loader)):
             images = images.cuda()
             target = target.cuda()
 
