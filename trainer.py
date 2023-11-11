@@ -208,7 +208,7 @@ class Trainer(object):
 
     def _torch_save_model(self, filename):
         torch.save({'state_dict': self.model.state_dict()},
-                   os.path.join(self.log_dir, filename))
+                   filename)
 
 
     def save_checkpoint(self, epoch, checkpoint_path):
