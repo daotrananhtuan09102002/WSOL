@@ -15,6 +15,7 @@ class Trainer(object):
     _NUM_CLASSES_MAPPING = {
         "CUB": 200,
         "ILSVRC": 1000,
+        "VOC": 20
     }
     _FEATURE_PARAM_LAYER_PATTERNS = {
         'vgg': ['features.'],
@@ -141,7 +142,7 @@ class Trainer(object):
         feature_norm_minmax = normalize_minmax(feature_norm)
         sim_target_flat = sim[torch.arange(B), target].view(B, -1)
         feature_norm_minmax_flat = feature_norm_minmax.view(B, -1)
-        if self.dataset_name == 'ILSVRC':
+        if self.dataset_name == 'ILSVRC' or self.dataset_name == 'VOC':
             sim_fg = (feature_norm_minmax_flat > self.sim_fg_thres).float()
             sim_bg = (feature_norm_minmax_flat < self.sim_bg_thres).float()
 

@@ -50,7 +50,7 @@ def transform_image_pil(image_path):
     return transformed_image
 
 
-def plot_cam(model, image_path, label):
+def plot_cam_from_path(model, image_path, label):
     # read image
     img = transform_image_pil(image_path)
     img = img.cuda()
