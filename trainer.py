@@ -248,7 +248,7 @@ class Trainer(object):
     def evaluate(self, epoch):
         print("Evaluate epoch {}".format(epoch))
         self.model_multi.eval()
-        accuracy = self._compute_accuracy(loader=self.loaders['val'])
+        accuracy = self._compute_accuracy(loader=self.loader['val'])
 
         return dict(classification_acc_val=accuracy)
     
