@@ -229,7 +229,7 @@ class Trainer(object):
         num_correct = np.zeros((len(topk)))
         num_images = 0
 
-        for i, (images, targets) in enumerate(tqdm(loader)):
+        for i, (images, targets) in enumerate(loader):
             images = images.cuda()
             targets = targets.cuda()
             output_dict = self.model_multi(images)
@@ -261,7 +261,7 @@ class Trainer(object):
         num_correct = 0
         num_images = 0
 
-        for batch_idx, (images, target) in enumerate(tqdm(loader)):
+        for batch_idx, (images, target) in enumerate(loader):
             images = images.cuda()
             target = target.cuda()
 
