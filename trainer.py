@@ -4,6 +4,7 @@ import wsol.method
 import os
 import torch
 import torch.nn as nn
+import numpy as np
 
 
 class Trainer(object):
@@ -224,10 +225,37 @@ class Trainer(object):
             self.model.load_state_dict(checkpoint['state_dict'], strict=True)
             print("Check {} loaded.".format(checkpoint_path))
 
+    def _compute_accuracy(self, loader, topk=(1,)):
+        num_correct = np.zeros((len(topk)))
+        num_images = 0
+
+        for i, (images, targets, image_ids) in enumerate(loader):
+            images = images.cuda()
+            targets = targets.cuda()
+            output_dict = self.model_multi(images)
+            pred_topk = torch.argsort(output_dict['logits'], dim=1, descending=True)[:, :max(topk)]
+
+            for i_k, k in enumerate(topk):
+                co = (pred_topk[:, :k] == targets.unsqueeze(-1)).float()
+                num_correct[i_k] += torch.sum(torch.max(co, dim=1)[0]).item()
+            num_images += images.size(0)
+
+        classification_acc = num_correct / float(num_images) * 100
+
+        return classification_acc
+    
+
+    def evaluate(self, epoch):
+        print("Evaluate epoch {}".format(epoch))
+        self.model_multi.eval()
+        accuracy = self._compute_accuracy(loader=self.loaders['val'])
+
+        return dict(classification_acc_val=accuracy)
+    
 
     def train(self, warm=False):
         self.model_multi.train()
-        loader = self.loader
+        loader = self.loader['train']
 
         total_loss = 0.0
         num_correct = 0
