@@ -256,7 +256,7 @@ class Trainer(object):
 
     def train(self, warm=False):
         self.model_multi.train()
-        loader = self.loader['train']
+        loader = self.loader
 
         total_loss = 0.0
         num_correct = 0
